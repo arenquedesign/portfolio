@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="lenis">
+<!--
+  PORTFOLIO — Victoria Arenque
+  Senior Product Designer
+
+  Fontes carregadas: Oswald (display/títulos) + Roboto (corpo)
+  via Google Fonts no <head>. Inter carregado via @import no CSS.
+
+  Estrutura de componentes:
+  1. Header         — fixo, z-index 100
+  2. Nav Menu       — fullscreen overlay, z-index 500
+  3. Avatar Modal   — lightbox, z-index 1000
+  4. Hero Section   — above the fold
+  5. Projects Grid  — lista de projetos (spotlight + hover de cor)
+  6. Case Sheet     — bottom sheet animado, z-index 2000
+  7. Cursor Dot     — cursor customizado (desktop only)
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO / Open Graph para melhor interpretação por plugins do Figma -->
+  <title>Victoria Arenque - Senior Product Designer</title>
+  <meta name="description" content="Portfolio of Victoria Arenque, Senior Product Designer specializing in fintech, proptech, and B2B SaaS.">
+  <meta name="author" content="Victoria Arenque">
+
+  <!-- Google Fonts: Oswald (display/títulos) + Roboto (corpo do case study) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Roboto:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Estilos principais -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body data-nav="closed">
+  <!--
+    data-nav="closed" — estado inicial do menu de navegação
+    Valores possíveis: "closed" | "open"
+    Alterado via JS ao clicar no #menuToggle
+  -->
+
+  <!-- =============================================
+       COMPONENT: Header
+       Description: Barra de navegação fixa no topo.
+                    Lado esquerdo: avatar circular + texto "HI THERE!"
+                    Lado direito: botão Resume
+       States: transparent background (sem fundo)
+       Scroll behavior: ao rolar para baixo, as letras de .header__text
+                        recebem classe .hiding (JS); ao subir, .showing
+       Z-index: 100
+  ============================================= -->
+  <header class="header">
+    <div class="header__container">
+
+      <!-- Esquerda: Avatar clicável + texto animado -->
+      <div class="header__brand">
+
+        <!-- Avatar: click abre o #avatarModal (lightbox da foto) -->
+        <div class="header__avatar" id="avatarBtn" role="button">
+          <img src="victoria-photo.jpg" alt="Victoria Arenque" class="header__avatar-image">
+        </div>
+
+        <!-- Texto "HI THERE!" — cada letra é um <span class="letter">
+             Motion: letras animam individualmente via CSS + classe JS
+             hiding: translateX(-10px) + opacity 0
+             showing: translateX(0) + opacity 1 -->
+        <p class="header__text" id="headerText">
+          <span class="letter">H</span><span class="letter">I</span><span class="letter">&nbsp;</span><span class="letter">T</span><span class="letter">H</span><span class="letter">E</span><span class="letter">R</span><span class="letter">E</span><span class="letter">!</span>
+        </p>
+      </div>
+
+      <!-- Direita: Botão Resume (link externo) -->
+      <div class="header__actions">
+        <a href="#resume" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+          <span class="btn__text">Resume</span>
+          <span class="btn__icon">
+            <!-- Ícone: external link (SVG inline) -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- =============================================
+       COMPONENT: Navigation Menu
+       Description: Menu fullscreen que cobre toda a viewport.
+                    Estrutura em camadas:
+                    1. .nav-menu__backgrounds — 3 painéis que deslizam da direita
+                    2. .nav-menu__overlay    — blur glassmorphism
+                    3. .nav-menu__content    — links + footer
+       States: hidden (default) | open (body[data-nav="open"])
+       Motion: GSAP timeline
+         - bg-panels: x 100%→0%, stagger 0.15s, 0.8s expo.out
+         - overlay: opacity 0→1, 0.5s power2.out
+         - menu-items: opacity+translateY 30px→0, stagger 0.08s, 0.6s power3.out
+         - footer: opacity 0→1, 0.5s power2.out
+       Trigger: click no #menuToggle (não presente no HTML atual)
+                ESC fecha o menu
+       Z-index: 500
+  ============================================= -->
+  <nav class="nav-menu" id="navMenu" aria-label="Menu de navegação">
+
+    <!-- Camadas de fundo: 3 painéis que animam em cascata -->
+    <div class="nav-menu__backgrounds" aria-hidden="true">
+      <div class="bg-panel bg-panel--1"></div>
+      <!-- Painel 2: levemente diferente, cria profundidade -->
+      <div class="bg-panel bg-panel--2"></div>
+      <!-- Painel 3: mais escuro, anima por último, fica na frente -->
+      <div class="bg-panel bg-panel--3"></div>
+    </div>
+
+    <!-- Overlay blur (glassmorphism) -->
+    <div class="nav-menu__overlay" aria-hidden="true"></div>
+
+    <!-- Conteúdo do menu: links + footer -->
+    <div class="nav-menu__content">
+      <ul class="nav-menu__list">
+        <!-- Cada item inicia: opacity:0, translateY:30px
+             GSAP anima para opacity:1, translateY:0 com stagger 0.08s -->
+        <li class="nav-menu__item"><a href="#work">Work</a></li>
+        <li class="nav-menu__item"><a href="#about">About</a></li>
+        <li class="nav-menu__item"><a href="#contact">Contact</a></li>
+        <li class="nav-menu__item"><a href="#resume">Resume</a></li>
+      </ul>
+
+      <!-- Footer do menu: copyright + social links
+           data-menu-fade: selecionado pelo JS para fade-in via GSAP -->
+      <div class="nav-menu__footer" data-menu-fade>
+        <p>Victoria Arenque &copy; 2024</p>
+        <div class="nav-menu__social">
+          <a href="#linkedin">LinkedIn</a>
+          <a href="#behance">Behance</a>
+          <a href="#dribbble">Dribbble</a>
+        </div>
+      </div>
+    </div>
+
+  </nav>
+
+
+  <!-- =============================================
+       COMPONENT: Avatar Modal
+       Description: Lightbox com a foto de Victoria em tamanho ampliado.
+                    Overlay com blur glassmorphism (backdrop-filter).
+                    Foto circular 400×400 com borda translúcida.
+       States: default (opacity:0, pointer-events:none)
+               active (.avatar-modal.active — opacity:1, pointer-events:all)
+       Motion: modal container — opacity 0→1, 0.4s ease
+               content — scale 0.8→1 + opacity 0→1, 0.4s spring cubic-bezier(0.34,1.56,0.64,1)
+       Trigger: click em #avatarBtn (header avatar)
+                close: #closeModalBtn | click overlay | ESC
+       Z-index: 1000
+  ============================================= -->
+  <div class="avatar-modal" id="avatarModal" role="dialog" aria-label="Foto de Victoria Arenque" aria-modal="true">
+
+    <!-- Overlay: clicável para fechar -->
+    <div class="avatar-modal__overlay"></div>
+
+    <!-- Conteúdo: foto + botão fechar -->
+    <div class="avatar-modal__content">
+      <img src="victoria-photo.jpg" alt="Victoria Arenque" class="avatar-modal__image">
+      <button class="avatar-modal__close" id="closeModalBtn" aria-label="Fechar modal">
+        <!-- Ícone: X (close) -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+
+  <!-- =============================================
+       COMPONENT: Hero Section
+       Description: Seção principal above the fold.
+                    Label uppercase → título Oswald light → descrição → toggle
+       Figma: container max-width 900px, centralizado,
+              título fluid clamp(2.5rem, 8vw, 5rem)
+  ============================================= -->
+  <section class="hero" id="work">
+    <div class="hero__container">
+
+      <!-- Label: "Senior Product Designer" -->
+      <span class="hero__label">Senior Product Designer</span>
+
+      <!-- Título principal: Oswald Light, uppercase -->
+      <h1 class="hero__title">Victoria Arenque</h1>
+
+      <!-- Descrição da designer -->
+      <p class="hero__description">
+        Victoria designs complex products at the intersection of user needs, data, and business constraints. With experience in fintech, proptech, and B2B SaaS, she partners closely with product and engineering teams to shape scalable solutions that enable better decisions and drive meaningful business outcomes.
+      </p>
+
+      <!-- =============================================
+           COMPONENT: Toggle Switch
+           Description: Alterna entre visualização "Personal" e "Real cases".
+           States: .toggle__option (inativo) | .toggle__option--active (ativo)
+           Interaction: click → remove --active de todos → aplica no clicado
+                        dispara CustomEvent 'toggleChanged' com { option: "personal"|"business" }
+           Figma: pill border, padding 4px, gap 4px, opção ativa com bg sólido
+      ============================================= -->
+      <div class="toggle" role="tablist" aria-label="Filtro de projetos">
+        <!-- State: data-option="personal" — inativo no load -->
+        <button class="toggle__option" data-option="personal" role="tab" aria-selected="false">Personal</button>
+        <!-- State: data-option="business" — ativo no load (.toggle__option--active) -->
+        <button class="toggle__option toggle__option--active" data-option="business" role="tab" aria-selected="true">Real cases</button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       COMPONENT: Project List
+       Description: Lista de projetos com grid 4 colunas.
+                    Efeito spotlight: ao hover no container, todos os itens
+                    ficam a 30% de opacidade; o item em hover volta a 100%.
+                    Ao hover em um item, o background do body muda de cor
+                    via JS (data-color) e o data-theme é aplicado ao body.
+       Figma: grid (auto / 2fr / 0.6fr / 1.8fr), gap 32px
+              divider 1px entre itens
+       Interaction:
+         - mouseenter → body.style.backgroundColor = data-color
+                        body.setAttribute('data-theme', data-theme)
+         - mouseleave → body.style.backgroundColor = '#000000'
+                        body.removeAttribute('data-theme')
+         - click (year2022) → abre o #caseSheet via GSAP
+  ============================================= -->
+  <section class="projects">
+    <div class="projects__container">
+
+      <!-- =============================================
+           Project Item 1: Mercado Pago 2024
+           data-color: #813321 (terracota escuro — fundo ao hover)
+           data-theme: "year2024" (aplica tema terracota #F7E9D0)
+           State: data-theme="year2024" aplicado no body durante hover
+      ============================================= -->
+      <article class="project-item" data-color="#813321" data-theme="year2024">
+        <div class="project-item__year">2024</div>
+        <h3 class="project-item__title">From a new offer to a complete redesign</h3>
+        <div class="project-item__brand">Mercado Pago</div>
+        <div class="project-item__skills">UX STRATEGY · PROBLEM FRAMING · INFORMATION ARCHITECTURE</div>
+      </article>
+
+      <!-- =============================================
+           Project Item 2: Mercado Pago 2023
+           data-color: #103214 (verde escuro — fundo ao hover)
+           data-theme: "year2023" (aplica tema verde #B0FFB5)
+           State: data-theme="year2023" aplicado no body durante hover
+      ============================================= -->
+      <article class="project-item" data-color="#103214" data-theme="year2023">
+        <div class="project-item__year">2023</div>
+        <h3 class="project-item__title">Feedback in app: efficiency with AI</h3>
+        <div class="project-item__brand">Mercado Pago</div>
+        <div class="project-item__skills">AI · RESEARCH · TEAM EFFICIENCY · DATA DRIVEN DESIGN</div>
+      </article>
+
+      <!-- =============================================
+           Project Item 3: QuintoAndar 2022
+           data-color: #101630 (azul escuro — fundo ao hover)
+           data-theme: "year2022" (aplica tema azul #A5C7EA)
+           State: data-theme="year2022" aplicado no body durante hover
+           Clickable: ABRE o case sheet (#caseSheet)
+           Motion: GSAP bottom sheet, y: 100% → 0, expo.out, 0.8s
+      ============================================= -->
+      <article class="project-item" data-color="#101630" data-theme="year2022">
+        <div class="project-item__year">2022</div>
+        <h3 class="project-item__title">A custom CRM, from scratch!</h3>
+        <div class="project-item__brand">QuintoAndar</div>
+        <div class="project-item__skills">MVP · BACKOFFICE · PROPTECH · COLLABORATIVE DESIGN &amp; FACILITATION</div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       COMPONENT: Case Study Bottom Sheet
+       Description: Painel deslizante que cobre toda a viewport (100dvh).
+                    Abre ao clicar no project-item[data-theme="year2022"].
+                    Estrutura:
+                    - .case-sheet__close    — botão fechar (fixo absoluto, não rola)
+                    - .case-sheet__scroll   — área de scroll única (Lenis secundário)
+                      - .case-sheet__header — navy #12152A (rola com conteúdo)
+                      - .case-sheet__body   — cream #FFFEF8 (rola com conteúdo)
+       States: default (translateY:100%, aria-hidden:true)
+               open (translateY:0, aria-hidden:false)
+       Motion: GSAP
+         open:  y 100%→0, duration 0.8s, ease expo.out
+         close: y 0→100%, duration 0.65s, ease expo.in
+       Scroll interno: Lenis secundário (lenisCaseSheet)
+         - wrapper: .case-sheet__scroll
+         - content: .case-sheet__scroll-content
+       Z-index: 2000
+       Close triggers: #caseSheetClose | ESC key
+  ============================================= -->
+  <div class="case-sheet" id="caseSheet" aria-hidden="true" role="dialog" aria-label="Case study: A custom CRM, from scratch" aria-modal="true">
+
+    <!-- Botão fechar — posição absoluta, não rola com o conteúdo
+         States: default (bg cream, ícone navy)
+                 .case-sheet__close--inverted (bg navy, ícone cream)
+                 → aplicado via JS quando scroll >= headerHeight - 55px -->
+    <button class="case-sheet__close" id="caseSheetClose" aria-label="Fechar case study">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Área de scroll único: header + body rolam juntos
+         Lenis usa este elemento como wrapper -->
+    <div class="case-sheet__scroll">
+      <div class="case-sheet__scroll-content">
+
+        <!-- =============================================
+             Case Sheet Header
+             Figma: bg #12152A, padding-top fluid clamp(80px, 12vw, 180px)
+             Rola com o conteúdo (não é sticky)
+        ============================================= -->
+        <div class="case-sheet__header">
+
+          <!-- Linha: Título + Year
+               Figma: flexbox row, align flex-end, gap 15px, padding 0 30px 54px 30px -->
+          <div class="case-sheet__title-area">
+            <!-- Título: Oswald Light, fluid clamp(2.5rem, 7vw, 7rem), cor #A5C7EA -->
+            <h2 class="case-sheet__title">A custom CRM, from scratch</h2>
+            <!-- Year tag: Roboto semibold, label size, cor #A5C7EA -->
+            <span class="case-sheet__year">2022</span>
+          </div>
+
+          <!-- Info Bar: bg #A5C7EA, texto #12152A
+               Figma: 4 colunas com larguras específicas
+               Company (flex:1) | Role (216px) | Squad (flex:1) | Stakeholders (380px) -->
+          <div class="case-sheet__info-bar">
+
+            <!-- Company: flex:1 (cresce) -->
+            <div class="case-sheet__info-item case-sheet__info-item--fill">
+              <span class="case-sheet__info-label">Company</span>
+              <span class="case-sheet__info-value">QuintoAndar, Brazil&#8217;s largest housing platform (unicorn, 4k+ employees)</span>
+            </div>
+
+            <!-- Role: 216px fixo -->
+            <div class="case-sheet__info-item case-sheet__info-item--role">
+              <span class="case-sheet__info-label">Role</span>
+              <span class="case-sheet__info-value">Product Designer</span>
+            </div>
+
+            <!-- Squad: flex:1 (cresce) -->
+            <div class="case-sheet__info-item case-sheet__info-item--fill">
+              <span class="case-sheet__info-label">Squad</span>
+              <span class="case-sheet__info-value">PM, Associate PM, Tech Lead, Engineers, and Product Designer</span>
+            </div>
+
+            <!-- Main Stakeholders: 380px fixo -->
+            <div class="case-sheet__info-item case-sheet__info-item--stakeholders">
+              <span class="case-sheet__info-label">Main Stakeholders</span>
+              <span class="case-sheet__info-value">Sales Secretariat (200+ secretaries)</span>
+            </div>
+
+          </div>
+        </div><!-- /.case-sheet__header -->
+
+        <!-- =============================================
+             Case Sheet Body
+             Figma: bg cream #FFFEF8
+             Estrutura: hero-image (full-width) + content (max-width 1301px)
+        ============================================= -->
+        <div class="case-sheet__body">
+
+          <!-- Hero image: full-width, aspect-ratio preservado do Figma (1907:936) -->
+          <img class="case-sheet__hero-image"
+               src="images/case-main-image-65715f.png"
+               alt="A custom CRM, from scratch — imagem principal do case">
+
+          <!-- =============================================
+               Case Sheet Content
+               Figma: max-width 1301px, padding 100px 30px, gap 30px entre rows
+               Cada row: label (200px, shrink 0) + texto (flex:1, max-width 900px)
+          ============================================= -->
+          <div class="case-sheet__content">
+
+            <!-- Row: Context -->
+            <div class="case-sheet__row">
+              <span class="case-sheet__row-label">context</span>
+              <p class="case-sheet__row-text">The Secretariat team was juggling three systems plus spreadsheets just to manage leads due to a systems integration process, since this team was part of a company that was acquired by QuintoAndar.</p>
+            </div>
+
+            <!-- Row: Main Problems -->
+            <div class="case-sheet__row">
+              <span class="case-sheet__row-label">main problems</span>
+              <ul class="case-sheet__row-text case-sheet__list">
+                <li>No integration between systems</li>
+                <li>Inefficient, manual workflows</li>
+                <li>Decreased productivity</li>
+              </ul>
+            </div>
+
+            <!-- Row: Design Opportunity -->
+            <div class="case-sheet__row">
+              <span class="case-sheet__row-label">design opportunity</span>
+              <p class="case-sheet__row-text">Build a centralized tool tailored to their needs, based on how they already worked&#8212;and how they wanted to work.</p>
+            </div>
+
+            <!-- Row: Impacts -->
+            <div class="case-sheet__row">
+              <span class="case-sheet__row-label">impacts</span>
+              <div class="case-sheet__row-text">
+                <ul class="case-sheet__list">
+                  <li>Workflows are estimated to be <strong>~30% faster</strong></li>
+                  <li>Stakeholders were impressed by how <strong>tailored</strong> the system felt</li>
+                </ul>
+                <p>In just <strong>12 weeks</strong>, we designed and released a custom CRM from scratch for the Sales Secretariat team. The project aimed to replace fragmented tools with a more integrated system and improve their daily productivity. It was a user-centered, design-led effort, built on solid prior research and strong team alignment.</p>
+              </div>
+            </div>
+
+            <!-- Row: What Guided Us -->
+            <div class="case-sheet__row">
+              <span class="case-sheet__row-label">what guided us</span>
+              <p class="case-sheet__row-text">Keep it simple. Keep it familiar. Integrate what matters.</p>
+            </div>
+
+            <!-- Row: Long Term -->
+            <div class="case-sheet__row">
+              <span class="case-sheet__row-label">long term</span>
+              <p class="case-sheet__row-text">We completed the delivery of the first version with at least 5 end-game features in the backlog.</p>
+            </div>
+
+            <!-- =============================================
+                 Section Header: Project Outlook
+                 Variant: --large (sem padding-bottom, demo vem imediatamente abaixo)
+                 Figma: Oswald Light, fluid clamp(2rem, 5vw, 4.5rem), uppercase, preto
+            ============================================= -->
+            <div class="case-sheet__section-header case-sheet__section-header--large">
+              <h3 class="case-sheet__section-title">Project outlook</h3>
+            </div>
+
+            <!-- Demo: Vídeo do protótipo (top variant: padding 50px 0 0)
+                 Figma: gap 17px entre media e caption -->
+            <div class="case-sheet__demo case-sheet__demo--top">
+              <video src="images/Tour pelo secretariat.mov" autoplay loop muted playsinline></video>
+              <p class="case-sheet__demo-caption">A quick demonstration of navigation in the first version of the CRM prototype&#8217;s, before the official release.</p>
+            </div>
+
+            <!-- Demo: Imagem do processo de handoff (bottom variant: padding 50px 0 50px) -->
+            <div class="case-sheet__demo case-sheet__demo--bottom">
+              <img src="images/case-process-demo.png" alt="CRM handoff process — especificações e redlines para front-end">
+              <p class="case-sheet__demo-caption">Part of the CRM handoff from the sales department of QuintoAndar, including behavior specifications and some redlines to front-end devs.</p>
+            </div>
+
+            <!-- =============================================
+                 Section Header: Design & Test
+                 Variant: default (com padding-bottom 30px)
+                 Subtítulo alinhado à baseline inferior do título
+            ============================================= -->
+            <div class="case-sheet__section-header">
+              <h3 class="case-sheet__section-title">Design &amp; test</h3>
+              <span class="case-sheet__section-subtitle">My role at the project</span>
+            </div>
+
+            <!-- Row: Workshops -->
+            <div class="case-sheet__row">
+              <span class="case-sheet__row-label">workshops</span>
+              <ul class="case-sheet__row-text case-sheet__list">
+                <li>Ran 7 Lean Inception sessions with the project&#8217;s squad to align on MVP features</li>
+                <li>Facilitated a Crazy 8&#8217;s workshop for rapid ideation</li>
+                <li>Conducted a card-sorting session with some analysts from the sales department to co-create the information architecture of the platform.</li>
+                <li>Ran at least 2 design critiques with the design team to refine the UI</li>
+              </ul>
+            </div>
+
+            <!-- Row: Wireframes -->
+            <div class="case-sheet__row">
+              <span class="case-sheet__row-label">wireframes</span>
+              <ul class="case-sheet__row-text case-sheet__list">
+                <li>Low-fidelity sketches in FigJam helped us explore and compare ideas</li>
+                <li>Conducted a team trade-off to choose the most viable path</li>
+              </ul>
+            </div>
+
+            <!-- Row: Prototypes -->
+            <div class="case-sheet__row">
+              <span class="case-sheet__row-label">prototypes</span>
+              <ul class="case-sheet__row-text case-sheet__list">
+                <li>Built medium-fidelity flows to validate with users</li>
+                <li>Refined into high-fidelity UI once we aligned on design and DS components</li>
+              </ul>
+            </div>
+
+            <!-- Row: Testing -->
+            <div class="case-sheet__row">
+              <span class="case-sheet__row-label">testing</span>
+              <ul class="case-sheet__row-text case-sheet__list">
+                <li>Applied Cognitive Walkthroughs with 5 participants in person</li>
+                <li>Focused on testing learnability and early friction points</li>
+              </ul>
+            </div>
+
+            <!-- Screenshots do processo: SVG full-width (padding 50px top e bottom) -->
+            <div class="case-sheet__screenshots">
+              <img src="images/case-process-screenshots.svg" alt="Process screenshots — wireframes e protótipos do CRM">
+            </div>
+
+            <!-- =============================================
+                 Section Header: Learnings
+                 Variant: default
+            ============================================= -->
+            <div class="case-sheet__section-header">
+              <h3 class="case-sheet__section-title">Learnings</h3>
+            </div>
+
+            <!-- Row: Skills Sharpened -->
+            <div class="case-sheet__row">
+              <span class="case-sheet__row-label">Skills sharpened</span>
+              <ul class="case-sheet__row-text case-sheet__list">
+                <li>MVP scoping through Lean Inception methodology</li>
+                <li>Trade-offs in design ideation</li>
+                <li>Managing design under time pressure</li>
+              </ul>
+            </div>
+
+            <!-- Row: What I'll Carry Forward -->
+            <div class="case-sheet__row">
+              <span class="case-sheet__row-label">What I&#8217;ll carry forward</span>
+              <ul class="case-sheet__row-text case-sheet__list">
+                <li>Test with users&#8212;but critique with designers first</li>
+                <li>Don&#8217;t wait to align with stakeholders</li>
+              </ul>
+            </div>
+
+            <!-- Row: Personal -->
+            <div class="case-sheet__row">
+              <span class="case-sheet__row-label">Personal</span>
+              <p class="case-sheet__row-text">Proved my value and built trust as the solo designer after the previous senior left</p>
+            </div>
+
+          </div><!-- /.case-sheet__content -->
+        </div><!-- /.case-sheet__body -->
+
+      </div><!-- /.case-sheet__scroll-content -->
+    </div><!-- /.case-sheet__scroll -->
+  </div><!-- /.case-sheet -->
+
+
+  <!-- =============================================
+       COMPONENT: Custom Cursor Dot
+       Description: Círculo customizado que segue o mouse.
+                    Visível apenas em desktop com mouse real
+                    (min-width:991px AND hover:hover AND pointer:fine).
+                    mix-blend-mode: difference — inverte cor sobre o fundo.
+       States: default (20×20) | is-hovering (48×48)
+       Motion: GSAP quickTo — x/y duration 0.15s power2
+               width/height expand: 0.3s power2.out
+       Trigger: mouseenter/mouseleave em a, button, .project-item, etc.
+  ============================================= -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+
+  <!-- =============================================
+       SCRIPTS — carregados ao final do body para não bloquear o render
+
+       1. GSAP 3.12.5 — engine de animação principal
+          Usado por: cursor dot, navigation menu, case sheet, avatar modal
+          CDN: cdnjs.cloudflare.com
+
+       2. Lenis 1.0.42 — smooth scroll
+          Usado por: scroll da home page + scroll interno do case sheet
+          CDN: unpkg.com/@studio-freight/lenis
+
+       3. script.js — lógica principal do portfolio
+  ============================================= -->
+
+  <!-- GSAP: engine de animação (carregado antes do Lenis pois script.js usa gsap) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- Lenis: smooth scroll (carregado antes do script.js que instancia o Lenis) -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <!-- Script principal do portfolio -->
+  <script src="script.js"></script>
+
+</body>
+</html>

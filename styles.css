@@ -1,0 +1,1892 @@
+/* =============================================
+   1. DESIGN TOKENS
+   ============================================= */
+
+:root {
+
+  /* ------------------------------------------
+     CORES — HOME (fundo cream / navy)
+     ------------------------------------------ */
+  --color-background:          #FFFEF8;
+  --color-foreground:          #12152A;
+
+  --color-text-primary:        #12152A;
+  --color-text-secondary:      #666666;
+  --color-text-muted:          #999999;
+
+  --color-surface:             #F5F4EE;
+  --color-surface-elevated:    #EDECEA;
+
+  --color-button-bg:           #12152A;
+  --color-button-text:         #FFFEF8;
+  --color-button-hover:        #2a2f4a;
+
+  --color-border:              #12152A;
+  --color-border-light:        #12152A;
+
+  --color-accent:              #12152A;
+
+  /* ------------------------------------------
+     CORES — CASE SHEET (sheet dark navy + cream)
+     Figma source: case-study-CRM frame
+     ------------------------------------------ */
+  --color-sheet-navy:          #12152A;   /* fundo header dark / texto sobre cream */
+  --color-sheet-blue:          #A5C7EA;   /* accent year2022: título, dividers, info-bar bg */
+  --color-sheet-cream:         #FFFEF8;   /* fundo body do case */
+  --color-sheet-text-dark:     #333333;   /* texto corpo do case */
+  --color-sheet-text-medium:   #494949;   /* captions de demo */
+  --color-sheet-close-bg:      #FFFEF8;   /* botão fechar (sobre navy) */
+  --color-sheet-close-inv-bg:  #12152A;   /* botão fechar invertido (sobre cream) */
+  --color-sheet-close-icon:    #12152A;   /* ícone do botão fechar padrão */
+  --color-sheet-close-inv-icon:#FFFEF8;   /* ícone do botão fechar invertido */
+
+  /* ------------------------------------------
+     CORES — THEMES DE PROJETO (hover na home)
+     ------------------------------------------ */
+
+  /* year2022 — QuintoAndar (azul) */
+  --color-theme-2022-accent:   #A5C7EA;
+  --color-theme-2022-bg:       #101630;
+  --color-theme-2022-text-on-accent: #101630;
+
+  /* year2023 — Mercado Pago (verde) */
+  --color-theme-2023-accent:   #B0FFB5;
+  --color-theme-2023-bg:       #103214;
+  --color-theme-2023-text-on-accent: #103214;
+
+  /* year2024 — Mercado Pago (terracota) */
+  --color-theme-2024-accent:   #F7E9D0;
+  --color-theme-2024-bg:       #813321;
+  --color-theme-2024-text-on-accent: #813321;
+
+  /* ------------------------------------------
+     TIPOGRAFIA — FAMÍLIAS
+     ------------------------------------------ */
+  --font-family-display:  'Oswald', sans-serif;           /* títulos hero, case title, section titles */
+  --font-family-body:     'Roboto', 'Inter', sans-serif;  /* corpo, labels, info-bar, captions */
+  --font-family-ui:       'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                          'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+                          'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+  /* ------------------------------------------
+     TIPOGRAFIA — TAMANHOS (escala base)
+     ------------------------------------------ */
+  --font-size-xs:   0.75rem;    /* 12px */
+  --font-size-sm:   0.875rem;   /* 14px */
+  --font-size-base: 1rem;       /* 16px */
+  --font-size-lg:   1.125rem;   /* 18px */
+  --font-size-xl:   1.25rem;    /* 20px */
+  --font-size-2xl:  1.5rem;     /* 24px */
+  --font-size-3xl:  2rem;       /* 32px */
+  --font-size-4xl:  2.5rem;     /* 40px */
+  --font-size-5xl:  3rem;       /* 48px */
+  --font-size-6xl:  4rem;       /* 64px */
+  --font-size-7xl:  5rem;       /* 80px */
+
+  /* Tamanhos específicos do case sheet (fluid com clamp)
+     Figma: label/year = 17.58px max | body/value = 18.53px max | caption = 18.58px max */
+  --font-size-label:       clamp(12px, 1.3vw, 17.58px);
+  --font-size-body-case:   clamp(14px, 1.4vw, 18.53px);
+  --font-size-caption:     clamp(13px, 1.4vw, 18.58px);
+
+  /* ------------------------------------------
+     TIPOGRAFIA — PESOS
+     ------------------------------------------ */
+  --font-weight-light:    300;
+  --font-weight-regular:  400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  /* ------------------------------------------
+     TIPOGRAFIA — LINE HEIGHTS
+     ------------------------------------------ */
+  --line-height-tight:    1.2;
+  --line-height-base:     1.5;
+  --line-height-relaxed:  1.75;
+  --line-height-case:     1.8;   /* linhas do corpo do case study */
+  --line-height-label:    1.17;  /* labels uppercase do case */
+
+  /* ------------------------------------------
+     ESPAÇAMENTO — ESCALA
+     ------------------------------------------ */
+  --spacing-xs:  0.5rem;   /* 8px */
+  --spacing-sm:  1rem;     /* 16px */
+  --spacing-md:  1.5rem;   /* 24px */
+  --spacing-lg:  2rem;     /* 32px */
+  --spacing-xl:  3rem;     /* 48px */
+  --spacing-2xl: 4rem;     /* 64px */
+  --spacing-3xl: 6rem;     /* 96px */
+
+  /* Padding lateral fixo do container principal */
+  --container-padding: 30px;
+
+  /* Espaçamentos fixos do case sheet (Figma exact) */
+  --sheet-padding-h:        30px;   /* padding lateral geral */
+  --sheet-title-gap:        15px;   /* gap entre título e year */
+  --sheet-title-pb:         54px;   /* padding-bottom da title-area */
+  --sheet-info-padding:     36px 30px; /* padding da info-bar */
+  --sheet-info-gap:         50px;   /* gap entre info-items */
+  --sheet-content-padding:  100px 30px; /* padding do content body */
+  --sheet-content-gap:      30px;   /* gap entre rows */
+  --sheet-row-gap:          40px;   /* gap entre label e texto */
+  --sheet-row-label-width:  200px;  /* largura fixa do label */
+  --sheet-section-pt:       100px;  /* padding-top dos section-headers */
+  --sheet-section-pb:       30px;   /* padding-bottom dos section-headers */
+  --sheet-demo-gap:         17px;   /* gap entre media e caption */
+  --sheet-close-size:       51px;   /* tamanho do botão fechar */
+  --sheet-close-radius:     25px;   /* border-radius do botão fechar */
+
+  /* ------------------------------------------
+     BORDER RADIUS
+     ------------------------------------------ */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-pill: 9999px;   /* pill shape */
+
+  /* ------------------------------------------
+     MOTION — DURATIONS
+     ------------------------------------------ */
+  --duration-fast:     150ms;
+  --duration-base:     250ms;
+  --duration-slow:     350ms;
+  --duration-medium:   400ms;
+  --duration-appear:   500ms;
+  --duration-panel:    800ms;
+  --duration-sheet-open:  0.8s;   /* GSAP: case sheet entra */
+  --duration-sheet-close: 0.65s;  /* GSAP: case sheet sai */
+
+  /* ------------------------------------------
+     MOTION — EASINGS
+     ------------------------------------------ */
+  --ease-base:     ease;
+  --ease-in-out:   ease-in-out;
+  --ease-out:      ease-out;
+  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);  /* spring: avatar modal content */
+  --ease-letter:   cubic-bezier(0.25, 0.46, 0.45, 0.94); /* header text letters */
+
+  /* ------------------------------------------
+     MOTION — TRANSIÇÕES COMPOSTAS
+     ------------------------------------------ */
+  --transition-fast:  150ms ease;
+  --transition-base:  250ms ease;
+  --transition-slow:  350ms ease;
+}
+
+
+/* =============================================
+   2. CSS RESET & SMOOTH SCROLL
+   ============================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: none; /* Firefox: oculta scrollbar */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge: oculta scrollbar */
+}
+
+/* Lenis — necessário para smooth scroll funcionar corretamente */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important; /* evita conflito entre CSS scroll-behavior e Lenis */
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain; /* áreas com scroll próprio não propagam para o Lenis */
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden; /* trava o scroll quando Lenis está parado */
+}
+
+
+/* =============================================
+   3. BASE STYLES & TYPOGRAPHY
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Tipografia fluida — Mobile First
+   Os media queries abaixo controlam o font-size da raiz (1rem)
+   de forma que todos os valores rem escalem proporcionalmente */
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Mobile (< 479px) */
+  font-size: calc(0.7495rem + 0.8368vw);
+}
+
+/* Tablet Portrait (479px–991px) */
+@media (min-width: 479px) {
+  html {
+    font-size: calc(0.7581rem + 0.3906vw);
+  }
+}
+
+/* Laptop / Tablet Landscape (991px–1440px) */
+@media (min-width: 991px) {
+  html {
+    font-size: calc(0.7581rem + 0.3906vw);
+  }
+}
+
+/* Desktop Large (1440px–1920px) */
+@media (min-width: 1440px) {
+  html {
+    font-size: calc(0.5991rem + 0.44543vw);
+  }
+}
+
+/* Desktop Extra Large (> 1920px) */
+@media (min-width: 1920px) {
+  html {
+    font-size: calc(0.625rem + 0.4167vw);
+  }
+}
+
+body {
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  margin: 0;
+  padding: 0;
+
+  /* Transição suave de cor de fundo ao hover nos projetos
+     Duração: 0.6s — suficiente para não ser abrupto */
+  transition: background-color 0.6s ease;
+}
+
+/* Transições globais para mudança de tema (hover nos project items) */
+body * {
+  transition: color 0.6s ease, background-color 0.6s ease, border-color 0.6s ease;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* Escala tipográfica de headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+h1 { font-size: var(--font-size-6xl); letter-spacing: -0.02em; }
+h2 { font-size: var(--font-size-4xl); letter-spacing: -0.01em; }
+h3 { font-size: var(--font-size-3xl); }
+h4 { font-size: var(--font-size-2xl); }
+h5 { font-size: var(--font-size-xl); }
+h6 { font-size: var(--font-size-lg); }
+
+p {
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-relaxed);
+}
+
+a {
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+
+/* =============================================
+   4. LAYOUT UTILITIES
+   ============================================= */
+
+/* Compensa o header fixo de ~90px */
+body {
+  padding-top: 90px;
+}
+
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted     { color: var(--color-text-muted); }
+
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+
+/* =============================================
+   5. COMPONENT: Header
+   States: default (transparent bg)
+   Motion: letter animation via JS class toggling (hiding / showing)
+   Figma: padding 32px 30px, avatar 40×40
+   ============================================= */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: transparent;
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg) var(--container-padding);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* =============================================
+   6. COMPONENT: Avatar (header)
+   States: default | hover (scale 1.05)
+   Motion: transform 250ms ease
+   ============================================= */
+
+.header__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition-base);
+  position: relative;
+}
+
+.header__avatar:hover {
+  transform: scale(1.05);
+}
+
+.header__avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.header__avatar-initial {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-background);
+}
+
+/* Header text "HI THERE!" — cada letra é um <span class="letter">
+   A animação é disparada via JS adicionando .hiding / .showing ao .header__text
+   Motion: translateX(-10px) + opacity 0 ao hiding, 0 + opacity 1 ao showing
+   Duration: 0.3s | Easing: cubic-bezier(0.25, 0.46, 0.45, 0.94) */
+.header__text {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+  display: flex;
+}
+
+.header__text .letter {
+  display: inline-block;
+  transition: all 0.3s var(--ease-letter);
+}
+
+/* Estado: scroll down — letras saem para a esquerda */
+.header__text.hiding .letter {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+/* Estado: scroll up — letras voltam */
+.header__text.showing .letter {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+
+/* =============================================
+   6. COMPONENT: Avatar Modal
+   States: default (hidden, opacity:0, pointer-events:none)
+           active (opacity:1, pointer-events:all)
+   Motion: overlay — opacity 0.4s ease
+           content — scale 0.8→1 + opacity 0→1, 0.4s spring
+   Trigger: click no .header__avatar (#avatarBtn)
+   ============================================= */
+
+.avatar-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-medium) var(--ease-base);
+  padding: 20px;
+}
+
+.avatar-modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Overlay: blur glassmorphism */
+.avatar-modal__overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+}
+
+/* Conteúdo: foto circular 400×400
+   Motion: scale 0.8→1 + opacity 0→1, duration 0.4s, easing spring */
+.avatar-modal__content {
+  position: relative;
+  z-index: 1001;
+  width: 400px;
+  height: 400px;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all var(--duration-medium) var(--ease-spring);
+}
+
+.avatar-modal.active .avatar-modal__content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.avatar-modal__image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  display: block;
+}
+
+/* Botão fechar — posicionado no canto superior direito da imagem */
+.avatar-modal__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.avatar-modal__close:hover {
+  opacity: 0.7;
+}
+
+
+/* =============================================
+   7. COMPONENT: Buttons
+   Variants: btn--primary
+   States: default | hover (translateY -1px) | active (translateY 0)
+   Motion: all 250ms ease
+   ============================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0.75rem 2rem;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.btn__text {
+  display: inline-block;
+}
+
+.btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+/* Variante primária: fundo branco, texto preto */
+.btn--primary {
+  background-color: var(--color-button-bg);
+  color: var(--color-button-text);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-button-hover);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+}
+
+
+/* =============================================
+   8. COMPONENT: Menu Toggle Button
+   Note: o botão #menuToggle não existe no HTML atual
+   (removido da versão publicada), mas o CSS é mantido
+   para preservar compatibilidade.
+   Motion: texto sobe (y: -100%) + ícone gira (rotation: 315°)
+           via GSAP timeline, duration 0.4s power3.inOut
+   ============================================= */
+
+.menu-toggle {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-toggle__text {
+  display: inline-block;
+}
+
+.menu-toggle__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-base);
+}
+
+
+/* =============================================
+   9. COMPONENT: Navigation Menu
+   States: hidden (visibility:hidden, pointer-events:none)
+           open (body[data-nav="open"])
+   Motion: GSAP timeline —
+     overlay: opacity 0→1, 0.5s power2.out
+     bg-panels: x 100%→0%, stagger 0.15s, 0.8s expo.out
+     menu-items: opacity+y 30px→0, stagger 0.08s, 0.6s power3.out
+     footer: opacity 0→1, 0.5s power2.out
+   Trigger: click no #menuToggle
+   ============================================= */
+
+.nav-menu {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 500;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+body[data-nav="open"] .nav-menu {
+  pointer-events: all;
+}
+
+/* Camadas de background que deslizam (efeito cascata de 3 painéis) */
+.nav-menu__backgrounds {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+}
+
+.bg-panel {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateX(100%); /* posição inicial: fora da tela à direita */
+}
+
+/* Painel 1 — mais claro, anima primeiro */
+.bg-panel--1 { background-color: rgba(20, 20, 20, 0.95); }
+/* Painel 2 — intermediário */
+.bg-panel--2 { background-color: rgba(30, 30, 30, 0.90); }
+/* Painel 3 — mais escuro, anima por último (fica na frente) */
+.bg-panel--3 { background-color: rgba(10, 10, 10, 0.98); }
+
+/* Overlay blur (blur glassmorphism sobre os painéis) */
+.nav-menu__overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0; /* inicia invisível, anima via GSAP */
+}
+
+/* Área central com os links */
+.nav-menu__content {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-3xl) var(--container-padding);
+}
+
+.nav-menu__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Cada item inicia em opacity:0 y:30px — GSAP anima para opacity:1 y:0 */
+.nav-menu__item {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Link — fonte display grande, fluid */
+.nav-menu__item a {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: opacity 0.3s ease-in-out;
+  display: inline-block;
+  opacity: 1;
+}
+
+/* Efeito Spotlight: hover na lista → todos os links vão a 50% */
+.nav-menu__list:hover .nav-menu__item a {
+  opacity: 0.5;
+}
+
+/* Link específico em hover: volta a 100% */
+.nav-menu__list:hover .nav-menu__item a:hover {
+  opacity: 1;
+}
+
+/* Footer do menu: copyright + redes sociais */
+.nav-menu__footer {
+  position: absolute;
+  bottom: var(--spacing-3xl);
+  left: var(--container-padding);
+  right: var(--container-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0; /* inicia invisível, anima via GSAP */
+}
+
+.nav-menu__footer p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.nav-menu__social {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.nav-menu__social a {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.nav-menu__social a:hover {
+  color: var(--color-text-primary);
+}
+
+
+/* =============================================
+   10. COMPONENT: Hero Section
+   Figma: container max-width 900px, alinhamento central
+          label uppercase tracking 0.1em
+          título Oswald light, fluid clamp(2.5rem, 8vw, 5rem)
+   ============================================= */
+
+.hero {
+  padding: var(--spacing-3xl) var(--container-padding);
+  text-align: center;
+}
+
+.hero__container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+/* Label "Senior Product Designer" */
+.hero__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Título principal — Oswald Light, fluid */
+.hero__title {
+  font-family: var(--font-family-display);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: var(--font-weight-light);
+  color: var(--color-text-primary);
+  letter-spacing: 0.02em;
+  line-height: var(--line-height-tight);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* Descrição — Inter regular, secondary color */
+.hero__description {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  max-width: 800px;
+  margin: 0;
+}
+
+
+/* =============================================
+   11. COMPONENT: Toggle Switch
+   Variants: .toggle__option (inativo) | .toggle__option--active (ativo)
+   States: default | hover (bg rgba white 5%) | active (scale 0.98)
+   Figma: border pill 1px, padding 4px interno, gap 4px
+   ============================================= */
+
+.toggle {
+  display: none;
+}
+
+.toggle--visible {
+  display: inline-flex;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+  gap: 4px;
+  margin-top: var(--spacing-md);
+}
+
+.toggle__option {
+  padding: 0.625rem 1.75rem;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  background-color: transparent;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+/* Estado ativo: fundo sólido */
+.toggle__option--active {
+  background-color: var(--color-button-bg);
+  color: var(--color-button-text);
+}
+
+/* Hover em opção inativa: leve destaque */
+.toggle__option:hover:not(.toggle__option--active) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Press: leve scale */
+.toggle__option:active {
+  transform: scale(0.98);
+}
+
+
+/* =============================================
+   12. COMPONENT: Project List
+   Variants: default
+   States: default | hover (spotlight effect) | hover:item (full opacity)
+   Motion: opacity 0.3s ease-in-out | border-color 0.3s ease-in-out
+   Figma: grid 4 colunas (auto / 2fr / 0.6fr / 1.8fr), gap 32px
+          border-bottom 1px #FFFFFF
+          primeiro item tem border-top visível
+   Interaction: hover no item → muda background do body via JS (data-color)
+                click no item year2022 → abre o case sheet
+   ============================================= */
+
+.projects {
+  padding: 0 var(--container-padding) var(--spacing-3xl);
+}
+
+.projects__container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.project-item {
+  display: grid;
+  grid-template-columns: auto 2fr 0.6fr 1.8fr;
+  gap: var(--spacing-lg);
+  align-items: center;
+  padding: var(--spacing-xl) 0;
+  border-bottom: 1px solid var(--color-border);
+  border-top: 1px solid transparent;
+  transition: opacity 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  cursor: pointer;
+  opacity: 1;
+}
+
+/* Primeiro item: divider no topo visível */
+.project-item:first-child {
+  border-top-color: var(--color-border);
+}
+
+/* Spotlight: hover no container → todos os itens vão a 30% */
+.projects__container:hover .project-item {
+  opacity: 0.3;
+  border-bottom-color: rgba(18, 21, 42, 0.3);
+  border-top-color: rgba(18, 21, 42, 0.3);
+}
+
+/* Primeiro item também: divider top esmaecido durante spotlight */
+.projects__container:hover .project-item:first-child {
+  border-top-color: rgba(18, 21, 42, 0.3);
+}
+
+/* Item em foco: volta a 100% */
+.projects__container:hover .project-item:hover {
+  opacity: 1;
+}
+
+/* Divider ACIMA do item em foco: 100% */
+.projects__container:hover .project-item:hover {
+  border-top-color: rgba(18, 21, 42, 1);
+}
+
+/* Divider ABAIXO do item em foco: mantém esmaecido */
+.projects__container:hover .project-item:hover {
+  border-bottom-color: rgba(18, 21, 42, 0.3);
+}
+
+/* Coluna: ano */
+.project-item__year {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Coluna: título do projeto */
+.project-item__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+  margin: 0;
+  transition: opacity var(--transition-fast);
+  text-transform: uppercase;
+}
+
+.project-item:hover .project-item__title {
+  opacity: 0.7;
+}
+
+/* Coluna: empresa */
+.project-item__brand {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+}
+
+/* Coluna: skills (alinhada à direita) */
+.project-item__skills {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: right;
+}
+
+
+/* =============================================
+   13. COMPONENT: Case Study Sheet
+   =============================================
+
+   13a. Sheet Container & Scroll
+   =============================================
+   States: default (translateY 100% — fora da tela)
+           open (translateY 0 — visible)
+   Motion: GSAP
+     open:  y 100%→0, duration 0.8s, expo.out
+     close: y 0→100%, duration 0.65s, expo.in
+   Scroll: Lenis secundário (lenisCaseSheet) controla o
+           .case-sheet__scroll; ao fechar, scroll reseta para 0
+   Z-index: 2000 (acima de tudo)
+   ============================================= */
+
+.case-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100dvh;
+  z-index: 2000;
+  transform: translateY(100%); /* posição inicial: oculto abaixo da viewport */
+  will-change: transform;
+  overflow: hidden;
+}
+
+/* Área de scroll único: header + body rolam juntos
+   Lenis wraps este elemento como wrapper e .case-sheet__scroll-content como content */
+.case-sheet__scroll {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* =============================================
+   13b. Sheet Header
+   Figma: fundo #12152A, padding-top fluid clamp(80px, 12vw, 180px)
+          layout: title-area (título + year) + info-bar abaixo
+   ============================================= */
+
+.case-sheet__header {
+  background-color: var(--color-sheet-navy);
+  /* padding-top fluid: y:180 no frame Figma (desktop), reduz em telas menores */
+  padding-top: clamp(80px, 12vw, 180px);
+}
+
+/* Botão fechar — fixo absoluto, não rola com o conteúdo
+   States: default (bg cream, icon navy)
+           --inverted (bg navy, icon cream) — aplicado via JS quando
+           o scroll ultrapassa o height do header (threshold = headerHeight - 55px)
+   Motion: background + color 0.25s ease | opacity + scale 0.2s ease */
+.case-sheet__close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: var(--sheet-close-size);
+  height: var(--sheet-close-size);
+  border-radius: var(--sheet-close-radius);
+  background: var(--color-sheet-close-bg);
+  border: none;
+  color: var(--color-sheet-close-icon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease,
+              opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+.case-sheet__close:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+/* Variante invertida: quando scroll está sobre área cream */
+.case-sheet__close--inverted {
+  background: var(--color-sheet-close-inv-bg);
+  color: var(--color-sheet-close-inv-icon);
+}
+
+/* Linha título + year — Figma: padding 0 30px 54px 30px, gap 15px, align flex-end */
+.case-sheet__title-area {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sheet-title-gap);
+  padding: 0 var(--sheet-padding-h) var(--sheet-title-pb) var(--sheet-padding-h);
+}
+
+/* Título: Oswald Light, fluid clamp(2.5rem, 7vw, 7rem), uppercase, cor azul */
+.case-sheet__title {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-light);
+  font-size: clamp(2.5rem, 7vw, 7rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-sheet-blue);
+  margin: 0;
+  letter-spacing: 0;
+}
+
+/* Year tag: Roboto semibold, label size, uppercase, azul */
+.case-sheet__year {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-label);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-sheet-blue);
+  padding-bottom: 0.6rem; /* alinha à baseline inferior do título grande */
+  flex-shrink: 0;
+}
+
+/* =============================================
+   13c. Sheet Info Bar
+   Figma: bg #A5C7EA, texto #12152A
+          padding 36px 30px, gap 50px entre items
+          4 items: Company (flex:1) | Role (216px) | Squad (flex:1) | Stakeholders (380px)
+   ============================================= */
+
+.case-sheet__info-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sheet-info-gap);
+  padding: var(--sheet-info-padding);
+  background-color: var(--color-sheet-blue);
+  flex-wrap: wrap;
+}
+
+.case-sheet__info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* Company e Squad: crescem para ocupar espaço disponível */
+.case-sheet__info-item--fill {
+  flex: 1;
+}
+
+/* Role: largura fixa 216px */
+.case-sheet__info-item--role {
+  width: 216px;
+  flex-shrink: 0;
+}
+
+/* Stakeholders: largura fixa 380px */
+.case-sheet__info-item--stakeholders {
+  width: 380px;
+  flex-shrink: 0;
+}
+
+/* Label da info: Roboto semibold, uppercase, 17.58px max */
+.case-sheet__info-label {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-label);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-sheet-navy);
+  line-height: var(--line-height-label);
+}
+
+/* Valor da info: Roboto light, 18.53px max */
+.case-sheet__info-value {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-body-case);
+  color: var(--color-sheet-navy);
+  line-height: var(--line-height-case);
+}
+
+/* =============================================
+   13d. Sheet Content & Rows
+   Figma: bg cream #FFFEF8, max-width 1301px, padding 100px 30px
+          rows: label 200px (fixo, shrink 0) + texto flex:1 max-width 900px
+          gap entre rows: 30px | gap label-texto: 40px
+   ============================================= */
+
+/* Corpo cream — contém hero-image + content */
+.case-sheet__body {
+  background-color: var(--color-sheet-cream);
+}
+
+/* Hero image: full-width, aspect ratio preservado do Figma (1907:936) */
+.case-sheet__hero-image {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1907 / 936;
+  object-fit: cover;
+}
+
+/* Container do conteúdo textual */
+.case-sheet__content {
+  max-width: 1301px;
+  margin: 0 auto;
+  padding: var(--sheet-content-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sheet-content-gap);
+}
+
+/* Row: label + texto lado a lado */
+.case-sheet__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--sheet-row-gap);
+}
+
+/* Label da row: Roboto semibold, uppercase, 17.58px max, 200px fixo */
+.case-sheet__row-label {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-label);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-sheet-text-dark);
+  flex-shrink: 0;
+  width: var(--sheet-row-label-width);
+  padding-top: 3px; /* alinha visualmente com baseline do texto */
+}
+
+/* Texto da row: Roboto light, 18.53px max, line-height 1.8 */
+.case-sheet__row-text {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-body-case);
+  line-height: var(--line-height-case);
+  color: var(--color-sheet-text-dark);
+  flex: 1;
+  max-width: 900px;
+  margin: 0;
+}
+
+/* Parágrafo dentro de row-text (ex: impacts) */
+.case-sheet__row-text p {
+  margin: 1.4em 0 0;
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-body-case);
+  line-height: var(--line-height-case);
+  color: var(--color-sheet-text-dark);
+}
+
+/* Bold inline */
+.case-sheet__row-text strong,
+.case-sheet__list strong {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* =============================================
+   13e. Sheet Section Headers
+   Figma: row, align flex-end, gap 10px
+          padding: 100px top, 30px bottom
+          --large variant: padding-bottom 0 (demo vem imediatamente abaixo)
+   ============================================= */
+
+.case-sheet__section-header {
+  padding: var(--sheet-section-pt) 0 var(--sheet-section-pb);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+/* Variante large: sem padding-bottom (demo segue imediatamente) */
+.case-sheet__section-header--large {
+  padding-bottom: 0;
+}
+
+/* Título de seção: Oswald Light, fluid, uppercase, preto */
+.case-sheet__section-title {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-light);
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+/* Subtítulo de seção: Roboto semibold, label size, alinha à baseline inferior */
+.case-sheet__section-subtitle {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-label);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-sheet-text-dark);
+  padding-bottom: 6px; /* alinha visualmente à baseline inferior do título */
+}
+
+/* =============================================
+   13f. Sheet Demo Sections & Screenshots
+   Variants: case-sheet__demo--top | case-sheet__demo--bottom
+   Figma: gap 17px entre media e caption
+          --top: padding 50px 0 0 | --bottom: padding 50px 0 50px
+   ============================================= */
+
+.case-sheet__demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sheet-demo-gap);
+}
+
+.case-sheet__demo--top {
+  padding: 50px 0 0;
+}
+
+.case-sheet__demo--bottom {
+  padding: 50px 0 50px;
+}
+
+/* Media (img e video) dentro de demo: full-width */
+.case-sheet__demo img,
+.case-sheet__demo video {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Caption: Roboto regular, 18.58px max, centralizado, cor #494949 */
+.case-sheet__demo-caption {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-caption);
+  line-height: 1.1;
+  color: var(--color-sheet-text-medium);
+  text-align: center;
+  margin: 0;
+}
+
+/* Screenshots do processo: full-width SVG */
+.case-sheet__screenshots {
+  padding: 50px 0 50px;
+}
+
+.case-sheet__screenshots img {
+  width: 100%;
+  display: block;
+}
+
+/* Bullet list nas rows */
+.case-sheet__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.case-sheet__list li {
+  position: relative;
+  padding-left: 1.2em;
+}
+
+/* Bullet customizado com pseudo-elemento */
+.case-sheet__list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  font-weight: var(--font-weight-light);
+}
+
+
+/* =============================================
+   14. THEMES (Color Schemes por projeto)
+   Trigger: body[data-theme="yearXXXX"] aplicado via JS
+            no mouseenter de cada .project-item
+   Cada tema redefine: --color-text-secondary, --color-border,
+   cores de texto secundário, dividers, toggle, btn-primary
+   ============================================= */
+
+/* -----------------------------------------------
+   Theme: year2022 — QuintoAndar (azul #A5C7EA)
+   bg-color: #101630
+   ----------------------------------------------- */
+body[data-theme="year2022"] {
+  --color-text-secondary: var(--color-theme-2022-accent);
+  --color-border:         var(--color-theme-2022-accent);
+  --color-border-light:   var(--color-theme-2022-accent);
+}
+
+body[data-theme="year2022"] .hero__label,
+body[data-theme="year2022"] .hero__description,
+body[data-theme="year2022"] .project-item__year,
+body[data-theme="year2022"] .project-item__brand,
+body[data-theme="year2022"] .project-item__skills {
+  color: var(--color-theme-2022-accent);
+}
+
+body[data-theme="year2022"] .project-item {
+  border-bottom-color: var(--color-theme-2022-accent) !important;
+  border-top-color:    var(--color-theme-2022-accent) !important;
+}
+
+body[data-theme="year2022"] .project-item:first-child {
+  border-top-color: var(--color-theme-2022-accent) !important;
+}
+
+body[data-theme="year2022"] .projects__container:hover .project-item {
+  border-bottom-color: rgba(165, 199, 234, 0.3) !important;
+  border-top-color:    rgba(165, 199, 234, 0.3) !important;
+}
+
+body[data-theme="year2022"] .projects__container:hover .project-item:hover {
+  border-top-color:    var(--color-theme-2022-accent) !important;
+  border-bottom-color: rgba(165, 199, 234, 0.3) !important;
+}
+
+body[data-theme="year2022"] .toggle {
+  border-color: var(--color-theme-2022-accent);
+}
+
+body[data-theme="year2022"] .hero__title,
+body[data-theme="year2022"] .project-item__title,
+body[data-theme="year2022"] .header__text,
+body[data-theme="year2022"] .toggle__option {
+  color: var(--color-theme-2022-accent);
+}
+
+body[data-theme="year2022"] .btn--primary,
+body[data-theme="year2022"] .toggle__option--active {
+  background-color: var(--color-theme-2022-accent);
+  color: var(--color-theme-2022-text-on-accent);
+}
+
+body[data-theme="year2022"] .header__avatar {
+  background-color: var(--color-theme-2022-accent);
+}
+
+body[data-theme="year2022"] .header__avatar-initial {
+  color: var(--color-theme-2022-text-on-accent);
+}
+
+/* -----------------------------------------------
+   Theme: year2023 — Mercado Pago (verde #B0FFB5)
+   bg-color: #103214
+   ----------------------------------------------- */
+body[data-theme="year2023"] {
+  --color-text-secondary: var(--color-theme-2023-accent);
+  --color-border:         var(--color-theme-2023-accent);
+  --color-border-light:   var(--color-theme-2023-accent);
+}
+
+body[data-theme="year2023"] .hero__label,
+body[data-theme="year2023"] .hero__description,
+body[data-theme="year2023"] .project-item__year,
+body[data-theme="year2023"] .project-item__brand,
+body[data-theme="year2023"] .project-item__skills {
+  color: var(--color-theme-2023-accent);
+}
+
+body[data-theme="year2023"] .project-item {
+  border-bottom-color: var(--color-theme-2023-accent) !important;
+  border-top-color:    var(--color-theme-2023-accent) !important;
+}
+
+body[data-theme="year2023"] .project-item:first-child {
+  border-top-color: var(--color-theme-2023-accent) !important;
+}
+
+body[data-theme="year2023"] .projects__container:hover .project-item {
+  border-bottom-color: rgba(176, 255, 181, 0.3) !important;
+  border-top-color:    rgba(176, 255, 181, 0.3) !important;
+}
+
+body[data-theme="year2023"] .projects__container:hover .project-item:hover {
+  border-top-color:    var(--color-theme-2023-accent) !important;
+  border-bottom-color: rgba(176, 255, 181, 0.3) !important;
+}
+
+body[data-theme="year2023"] .toggle {
+  border-color: var(--color-theme-2023-accent);
+}
+
+body[data-theme="year2023"] .hero__title,
+body[data-theme="year2023"] .project-item__title,
+body[data-theme="year2023"] .header__text,
+body[data-theme="year2023"] .toggle__option {
+  color: var(--color-theme-2023-accent);
+}
+
+body[data-theme="year2023"] .btn--primary,
+body[data-theme="year2023"] .toggle__option--active {
+  background-color: var(--color-theme-2023-accent);
+  color: var(--color-theme-2023-text-on-accent);
+}
+
+body[data-theme="year2023"] .header__avatar {
+  background-color: var(--color-theme-2023-accent);
+}
+
+body[data-theme="year2023"] .header__avatar-initial {
+  color: var(--color-theme-2023-text-on-accent);
+}
+
+/* -----------------------------------------------
+   Theme: year2024 — Mercado Pago (terracota #F7E9D0)
+   bg-color: #813321
+   ----------------------------------------------- */
+body[data-theme="year2024"] {
+  --color-text-secondary: var(--color-theme-2024-accent);
+  --color-border:         var(--color-theme-2024-accent);
+  --color-border-light:   var(--color-theme-2024-accent);
+}
+
+body[data-theme="year2024"] .hero__label,
+body[data-theme="year2024"] .hero__description,
+body[data-theme="year2024"] .project-item__year,
+body[data-theme="year2024"] .project-item__brand,
+body[data-theme="year2024"] .project-item__skills {
+  color: var(--color-theme-2024-accent);
+}
+
+body[data-theme="year2024"] .project-item {
+  border-bottom-color: var(--color-theme-2024-accent) !important;
+  border-top-color:    var(--color-theme-2024-accent) !important;
+}
+
+body[data-theme="year2024"] .project-item:first-child {
+  border-top-color: var(--color-theme-2024-accent) !important;
+}
+
+body[data-theme="year2024"] .projects__container:hover .project-item {
+  border-bottom-color: rgba(247, 233, 208, 0.3) !important;
+  border-top-color:    rgba(247, 233, 208, 0.3) !important;
+}
+
+body[data-theme="year2024"] .projects__container:hover .project-item:hover {
+  border-top-color:    var(--color-theme-2024-accent) !important;
+  border-bottom-color: rgba(247, 233, 208, 0.3) !important;
+}
+
+body[data-theme="year2024"] .toggle {
+  border-color: var(--color-theme-2024-accent);
+}
+
+body[data-theme="year2024"] .hero__title,
+body[data-theme="year2024"] .project-item__title,
+body[data-theme="year2024"] .header__text,
+body[data-theme="year2024"] .toggle__option {
+  color: var(--color-theme-2024-accent);
+}
+
+body[data-theme="year2024"] .btn--primary,
+body[data-theme="year2024"] .toggle__option--active {
+  background-color: var(--color-theme-2024-accent);
+  color: var(--color-theme-2024-text-on-accent);
+}
+
+body[data-theme="year2024"] .header__avatar {
+  background-color: var(--color-theme-2024-accent);
+}
+
+body[data-theme="year2024"] .header__avatar-initial {
+  color: var(--color-theme-2024-text-on-accent);
+}
+
+
+/* =============================================
+   15. COMPONENT: Custom Cursor
+   Variants: default (20×20) | is-hovering (48×48)
+   Blend mode: difference (inverte cor sobre o fundo)
+   Motion: GSAP quickTo — x/y duration 0.15s power2
+           width/height: 0.3s power2.out
+   Visibility: apenas em desktop com mouse (min-width:991px AND hover:hover AND pointer:fine)
+   ============================================= */
+
+/* Ocultar cursor padrão do sistema apenas em desktop com mouse real */
+@media (min-width: 991px) and (hover: hover) and (pointer: fine) {
+  body,
+  a, button, [role="button"],
+  .project-item,
+  .header__avatar,
+  .avatar-modal__close,
+  .btn,
+  .toggle__option,
+  .case-sheet__close,
+  [cursor="pointer"],
+  [style*="cursor: pointer"],
+  [style*="cursor:pointer"] {
+    cursor: none !important;
+  }
+}
+
+/* Cursor dot: círculo branco, mix-blend-mode difference */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  will-change: transform;
+}
+
+/* Estado hover: expande para 48×48 */
+.cursor-dot.is-hovering {
+  width: 48px;
+  height: 48px;
+  mix-blend-mode: difference;
+}
+
+/* Ocultar em touch devices e telas pequenas */
+@media (max-width: 991px), (hover: none), (pointer: coarse) {
+  .cursor-dot {
+    display: none !important;
+  }
+
+  body {
+    cursor: auto !important;
+  }
+}
+
+
+/* =============================================
+   16. RESPONSIVE OVERRIDES
+
+   16a. Tablet (max-width: 768px)
+   ============================================= */
+
+@media (max-width: 768px) {
+
+  /* Header */
+  .header__container {
+    padding: var(--spacing-md) var(--container-padding);
+  }
+
+  .header__avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .header__avatar-initial {
+    font-size: var(--font-size-base);
+  }
+
+  .header__text {
+    font-size: 0.625rem;
+  }
+
+  /* Botão */
+  .btn {
+    padding: 0.625rem 1.5rem;
+    font-size: var(--font-size-xs);
+  }
+
+  body {
+    padding-top: 80px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: var(--spacing-2xl) var(--container-padding);
+  }
+
+  .hero__description {
+    font-size: var(--font-size-sm);
+  }
+
+  /* Toggle */
+  .toggle__option {
+    padding: 0.5rem 1.5rem;
+    font-size: var(--font-size-xs);
+  }
+
+  /* Projects */
+  .projects {
+    padding: 0 var(--container-padding) var(--spacing-2xl);
+  }
+
+  .project-item {
+    grid-template-columns: auto 2fr 0.6fr 1.8fr;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg) 0;
+  }
+
+  .project-item__year  { font-size: var(--font-size-xs); }
+  .project-item__title { font-size: var(--font-size-xl); }
+  .project-item__brand { font-size: var(--font-size-sm); }
+  .project-item__skills { font-size: var(--font-size-xs); }
+
+  /* Navigation Menu */
+  .nav-menu__item a {
+    font-size: clamp(1.5rem, 8vw, 3rem);
+  }
+
+  .nav-menu__footer {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    text-align: center;
+  }
+
+  /* Avatar Modal */
+  .avatar-modal__content {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Case Sheet */
+  .case-sheet__title-area {
+    padding: 0 20px 40px 20px;
+  }
+
+  .case-sheet__row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .case-sheet__row-label {
+    width: auto;
+  }
+
+  .case-sheet__content {
+    padding: 80px 20px 80px;
+  }
+
+  .case-sheet__info-bar {
+    gap: 24px 40px;
+    padding: 24px 20px;
+  }
+
+  .case-sheet__info-item--role {
+    width: auto;
+    flex-shrink: 1;
+    min-width: 160px;
+  }
+
+  .case-sheet__info-item--stakeholders {
+    width: auto;
+    flex-shrink: 1;
+    min-width: 200px;
+  }
+
+  .case-sheet__section-header {
+    padding: 60px 0 20px;
+    flex-wrap: wrap;
+  }
+
+  .case-sheet__section-header--large {
+    padding-top: 60px;
+    padding-bottom: 0;
+  }
+
+  .case-sheet__demo--top    { padding: 30px 0 0; }
+  .case-sheet__demo--bottom { padding: 30px 0 30px; }
+
+  .case-sheet__screenshots { padding: 30px 0 30px; }
+}
+
+/* =============================================
+   16b. Mobile (max-width: 480px)
+   ============================================= */
+
+@media (max-width: 480px) {
+
+  /* Header */
+  .header__container {
+    padding: var(--spacing-sm) var(--container-padding);
+  }
+
+  .header__brand {
+    gap: 0.5rem;
+  }
+
+  .header__avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .header__avatar-initial {
+    font-size: var(--font-size-sm);
+  }
+
+  .header__text {
+    font-size: 0.5625rem;
+  }
+
+  .btn {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.6875rem;
+  }
+
+  body {
+    padding-top: 70px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: var(--spacing-xl) var(--container-padding);
+  }
+
+  .hero__label {
+    font-size: 0.625rem; /* 10px */
+  }
+
+  .hero__description {
+    font-size: var(--font-size-sm);
+  }
+
+  /* Toggle */
+  .toggle {
+    padding: 3px;
+    gap: 3px;
+  }
+
+  .toggle__option {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.6875rem;
+  }
+
+  /* Projects */
+  .projects {
+    padding: 0 var(--container-padding) var(--spacing-xl);
+  }
+
+  .project-item {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md) 0;
+  }
+
+  .project-item__year  { font-size: 0.6875rem; }
+  .project-item__title { font-size: var(--font-size-lg); }
+  .project-item__brand { font-size: var(--font-size-sm); }
+
+  .project-item__skills {
+    font-size: 0.6875rem;
+    text-align: left; /* no mobile, alinha à esquerda como as outras colunas */
+  }
+
+  /* Navigation Menu */
+  .nav-menu__list {
+    gap: var(--spacing-md);
+  }
+
+  .nav-menu__footer {
+    bottom: var(--spacing-xl);
+  }
+
+  /* Avatar Modal */
+  .avatar-modal__content {
+    width: 250px;
+    height: 250px;
+  }
+
+  /* Case Sheet */
+  .case-sheet__header {
+    padding: 20px 20px 0;
+  }
+
+  .case-sheet__title-area {
+    padding: 0 20px 28px 20px;
+  }
+
+  .case-sheet__close {
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .case-sheet__content {
+    padding: 60px 20px 60px;
+  }
+
+  .case-sheet__info-bar {
+    gap: 16px;
+    padding: 20px;
+  }
+
+  /* Mobile: todos os info-items ocupam 100% */
+  .case-sheet__info-item--fill,
+  .case-sheet__info-item--role,
+  .case-sheet__info-item--stakeholders {
+    width: 100%;
+    flex-shrink: 1;
+    min-width: unset;
+  }
+
+  .case-sheet__section-header {
+    padding: 40px 0 16px;
+  }
+
+  .case-sheet__section-header--large {
+    padding-top: 40px;
+  }
+
+  .case-sheet__demo--top    { padding: 24px 0 0; }
+  .case-sheet__demo--bottom { padding: 24px 0 24px; }
+
+  .case-sheet__screenshots { padding: 24px 0 24px; }
+}
+
+/* Viewport muito pequeno */
+@media (max-width: 350px) {
+  .avatar-modal__content {
+    width: 220px;
+    height: 220px;
+  }
+}
